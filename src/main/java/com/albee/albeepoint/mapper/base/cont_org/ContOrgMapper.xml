@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.albee.albeepoint.mapper.cont_org.ContOrgMapper">
-  <resultMap id="BaseResultMap" type="com.albee.albeepoint.mapper.cont_org.ContOrg">
+<mapper namespace="com.albee.albeepoint.mapper.base.cont_org.ContOrgMapper">
+  <resultMap id="BaseResultMap" type="com.albee.albeepoint.mapper.base.cont_org.ContOrg">
     <id column="CONT_NO" jdbcType="BIGINT" property="contNo" />
     <id column="ORG_NO" jdbcType="BIGINT" property="orgNo" />
     <result column="CONT_SEQ" jdbcType="BIGINT" property="contSeq" />
@@ -78,7 +78,7 @@
     CONT_NO, ORG_NO, CONT_SEQ, BRCH_POLICY_TYPE_CD, SAVE_CAN_YN, USE_CAN_YN, CONT_ORG_STS_CD, 
     TOTAL_ISU_ABLE_PT, TOTAL_ISU_ABLE_CNT, REG_USER_ID, REG_DT, LAST_MOD_USER_ID, LAST_MOD_DT
   </sql>
-  <select id="selectByExample" parameterType="com.albee.albeepoint.mapper.cont_org.ContOrgExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.albee.albeepoint.mapper.base.cont_org.ContOrgExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -104,13 +104,13 @@
     where CONT_NO = #{contNo,jdbcType=BIGINT}
       and ORG_NO = #{orgNo,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.albee.albeepoint.mapper.cont_org.ContOrgExample">
+  <delete id="deleteByExample" parameterType="com.albee.albeepoint.mapper.base.cont_org.ContOrgExample">
     delete from cont_org
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.albee.albeepoint.mapper.cont_org.ContOrg">
+  <insert id="insert" parameterType="com.albee.albeepoint.mapper.base.cont_org.ContOrg">
     insert into cont_org (CONT_NO, ORG_NO, CONT_SEQ, 
       BRCH_POLICY_TYPE_CD, SAVE_CAN_YN, USE_CAN_YN, 
       CONT_ORG_STS_CD, TOTAL_ISU_ABLE_PT, TOTAL_ISU_ABLE_CNT, 
@@ -122,7 +122,7 @@
       #{regUserId,jdbcType=VARCHAR}, #{regDt,jdbcType=TIMESTAMP}, #{lastModUserId,jdbcType=VARCHAR}, 
       #{lastModDt,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.albee.albeepoint.mapper.cont_org.ContOrg">
+  <insert id="insertSelective" parameterType="com.albee.albeepoint.mapper.base.cont_org.ContOrg">
     insert into cont_org
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="contNo != null">
@@ -207,7 +207,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.albee.albeepoint.mapper.cont_org.ContOrgExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.albee.albeepoint.mapper.base.cont_org.ContOrgExample" resultType="java.lang.Long">
     select count(*) from cont_org
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -279,7 +279,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.albee.albeepoint.mapper.cont_org.ContOrg">
+  <update id="updateByPrimaryKeySelective" parameterType="com.albee.albeepoint.mapper.base.cont_org.ContOrg">
     update cont_org
     <set>
       <if test="contSeq != null">
@@ -319,7 +319,7 @@
     where CONT_NO = #{contNo,jdbcType=BIGINT}
       and ORG_NO = #{orgNo,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.albee.albeepoint.mapper.cont_org.ContOrg">
+  <update id="updateByPrimaryKey" parameterType="com.albee.albeepoint.mapper.base.cont_org.ContOrg">
     update cont_org
     set CONT_SEQ = #{contSeq,jdbcType=BIGINT},
       BRCH_POLICY_TYPE_CD = #{brchPolicyTypeCd,jdbcType=VARCHAR},

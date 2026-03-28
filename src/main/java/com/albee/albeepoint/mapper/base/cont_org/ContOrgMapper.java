@@ -1,7 +1,7 @@
-package com.albee.albeepoint.mapper.cont_org;
+package com.albee.albeepoint.mapper.base.cont_org;
 
-import com.albee.albeepoint.mapper.cont_org.ContOrg;
-import com.albee.albeepoint.mapper.cont_org.ContOrgExample;
+import com.albee.albeepoint.mapper.base.cont_org.ContOrg;
+import com.albee.albeepoint.mapper.base.cont_org.ContOrgExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

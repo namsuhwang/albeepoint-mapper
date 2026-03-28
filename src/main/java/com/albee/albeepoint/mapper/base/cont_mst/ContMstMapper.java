@@ -1,7 +1,7 @@
-package com.albee.albeepoint.mapper.cont_mst;
+package com.albee.albeepoint.mapper.base.cont_mst;
 
-import com.albee.albeepoint.mapper.cont_mst.ContMst;
-import com.albee.albeepoint.mapper.cont_mst.ContMstExample;
+import com.albee.albeepoint.mapper.base.cont_mst.ContMst;
+import com.albee.albeepoint.mapper.base.cont_mst.ContMstExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

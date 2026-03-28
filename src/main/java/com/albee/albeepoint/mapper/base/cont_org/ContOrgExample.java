@@ -1,4 +1,4 @@
-package com.albee.albeepoint.mapper.cont_org;
+package com.albee.albeepoint.mapper.base.cont_org;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

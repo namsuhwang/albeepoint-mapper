@@ -1,4 +1,4 @@
-package com.albee.albeepoint.mapper.cont_mst;
+package com.albee.albeepoint.mapper.base.cont_mst;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
