@@ -1,0 +1,7 @@
+# One table name per line
+# Lines starting with # are ignored
+
+cont_org
+cont_mst
+# customer
+# product

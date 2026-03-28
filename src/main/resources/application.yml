@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: albeepoint-mapper
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://albeesoft.cafe24.com:3306/albeepoint
+    username: albeepoint
+    password: dba3048!01
+
+mybatis:
+  mapper-locations: classpath*:com/albee/albeepoint/mapper/**/*.xml
+  type-aliases-package: com.albee.albeepoint.mapper
+  configuration:
+    map-underscore-to-camel-case: true
+    jdbc-type-for-null: 'NULL'
+    default-fetch-size: 100
+    default-statement-timeout: 30
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: info
+    com.albee.albeepoint: debug
+    org.mybatis: debug
+    jdbc.sqlonly: off
