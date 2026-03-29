@@ -1,7 +1,27 @@
 # One table name per line
 # Lines starting with # are ignored
 
-cont_org
-cont_mst
-# customer
-# product
+t_brch_mst
+t_cont_brch
+t_cont_mst
+t_cont_mst_hist
+t_cont_org
+t_cont_record
+t_cont_rel
+t_cont_stat
+t_enc_info
+t_ip_filter
+t_isu_target
+t_member_mst
+t_member_pid
+t_member_pt_mst
+t_org_mst
+t_pt_mst
+t_sub_cont_mst
+t_sub_cont_mst_hist
+t_tr_hist
+t_tr_hist_detail
+t_tr_hist_exp
+t_tr_log
+t_tr_rel
+t_uri_mst

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.albee.albeepoint.mapper.base.t_cont_stat.TContStatMapper">
+  <resultMap id="BaseResultMap" type="com.albee.albeepoint.mapper.base.t_cont_stat.TContStat">
+    <id column="BASE_DAY" jdbcType="VARCHAR" property="baseDay" />
+    <id column="CONT_NO" jdbcType="BIGINT" property="contNo" />
+    <id column="CONT_STAT_GB_CD" jdbcType="VARCHAR" property="contStatGbCd" />
+    <id column="ORG_CD" jdbcType="VARCHAR" property="orgCd" />
+    <id column="BRCH_CD" jdbcType="VARCHAR" property="brchCd" />
+    <result column="TOTAL_ISU_PT" jdbcType="BIGINT" property="totalIsuPt" />
+    <result column="TOTAL_ISU_CNT" jdbcType="BIGINT" property="totalIsuCnt" />
+    <result column="TOTAL_USE_PT" jdbcType="BIGINT" property="totalUsePt" />
+    <result column="TOTAL_USE_CNT" jdbcType="BIGINT" property="totalUseCnt" />
+    <result column="REG_USER_ID" jdbcType="VARCHAR" property="regUserId" />
+    <result column="REG_DT" jdbcType="TIMESTAMP" property="regDt" />
+    <result column="LAST_MOD_USER_ID" jdbcType="VARCHAR" property="lastModUserId" />
+    <result column="LAST_MOD_DT" jdbcType="TIMESTAMP" property="lastModDt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BASE_DAY, CONT_NO, CONT_STAT_GB_CD, ORG_CD, BRCH_CD, TOTAL_ISU_PT, TOTAL_ISU_CNT, 
+    TOTAL_USE_PT, TOTAL_USE_CNT, REG_USER_ID, REG_DT, LAST_MOD_USER_ID, LAST_MOD_DT
+  </sql>
+  <select id="selectByExample" parameterType="com.albee.albeepoint.mapper.base.t_cont_stat.TContStatExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_cont_stat
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_cont_stat
+    where BASE_DAY = #{baseDay,jdbcType=VARCHAR}
+      and CONT_NO = #{contNo,jdbcType=BIGINT}
+      and CONT_STAT_GB_CD = #{contStatGbCd,jdbcType=VARCHAR}
+      and ORG_CD = #{orgCd,jdbcType=VARCHAR}
+      and BRCH_CD = #{brchCd,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_cont_stat
+    where BASE_DAY = #{baseDay,jdbcType=VARCHAR}
+      and CONT_NO = #{contNo,jdbcType=BIGINT}
+      and CONT_STAT_GB_CD = #{contStatGbCd,jdbcType=VARCHAR}
+      and ORG_CD = #{orgCd,jdbcType=VARCHAR}
+      and BRCH_CD = #{brchCd,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.albee.albeepoint.mapper.base.t_cont_stat.TContStatExample">
+    delete from t_cont_stat
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.albee.albeepoint.mapper.base.t_cont_stat.TContStat">
+    insert into t_cont_stat (BASE_DAY, CONT_NO, CONT_STAT_GB_CD, 
+      ORG_CD, BRCH_CD, TOTAL_ISU_PT, 
+      TOTAL_ISU_CNT, TOTAL_USE_PT, TOTAL_USE_CNT, 
+      REG_USER_ID, REG_DT, LAST_MOD_USER_ID, 
+      LAST_MOD_DT)
+    values (#{baseDay,jdbcType=VARCHAR}, #{contNo,jdbcType=BIGINT}, #{contStatGbCd,jdbcType=VARCHAR}, 
+      #{orgCd,jdbcType=VARCHAR}, #{brchCd,jdbcType=VARCHAR}, #{totalIsuPt,jdbcType=BIGINT}, 
+      #{totalIsuCnt,jdbcType=BIGINT}, #{totalUsePt,jdbcType=BIGINT}, #{totalUseCnt,jdbcType=BIGINT}, 
+      #{regUserId,jdbcType=VARCHAR}, #{regDt,jdbcType=TIMESTAMP}, #{lastModUserId,jdbcType=VARCHAR}, 
+      #{lastModDt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.albee.albeepoint.mapper.base.t_cont_stat.TContStat">
+    insert into t_cont_stat
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="baseDay != null">
+        BASE_DAY,
+      </if>
+      <if test="contNo != null">
+        CONT_NO,
+      </if>
+      <if test="contStatGbCd != null">
+        CONT_STAT_GB_CD,
+      </if>
+      <if test="orgCd != null">
+        ORG_CD,
+      </if>
+      <if test="brchCd != null">
+        BRCH_CD,
+      </if>
+      <if test="totalIsuPt != null">
+        TOTAL_ISU_PT,
+      </if>
+      <if test="totalIsuCnt != null">
+        TOTAL_ISU_CNT,
+      </if>
+      <if test="totalUsePt != null">
+        TOTAL_USE_PT,
+      </if>
+      <if test="totalUseCnt != null">
+        TOTAL_USE_CNT,
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID,
+      </if>
+      <if test="regDt != null">
+        REG_DT,
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID,
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="baseDay != null">
+        #{baseDay,jdbcType=VARCHAR},
+      </if>
+      <if test="contNo != null">
+        #{contNo,jdbcType=BIGINT},
+      </if>
+      <if test="contStatGbCd != null">
+        #{contStatGbCd,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCd != null">
+        #{orgCd,jdbcType=VARCHAR},
+      </if>
+      <if test="brchCd != null">
+        #{brchCd,jdbcType=VARCHAR},
+      </if>
+      <if test="totalIsuPt != null">
+        #{totalIsuPt,jdbcType=BIGINT},
+      </if>
+      <if test="totalIsuCnt != null">
+        #{totalIsuCnt,jdbcType=BIGINT},
+      </if>
+      <if test="totalUsePt != null">
+        #{totalUsePt,jdbcType=BIGINT},
+      </if>
+      <if test="totalUseCnt != null">
+        #{totalUseCnt,jdbcType=BIGINT},
+      </if>
+      <if test="regUserId != null">
+        #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.albee.albeepoint.mapper.base.t_cont_stat.TContStatExample" resultType="java.lang.Long">
+    select count(*) from t_cont_stat
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_cont_stat
+    <set>
+      <if test="row.baseDay != null">
+        BASE_DAY = #{row.baseDay,jdbcType=VARCHAR},
+      </if>
+      <if test="row.contNo != null">
+        CONT_NO = #{row.contNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.contStatGbCd != null">
+        CONT_STAT_GB_CD = #{row.contStatGbCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgCd != null">
+        ORG_CD = #{row.orgCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.brchCd != null">
+        BRCH_CD = #{row.brchCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.totalIsuPt != null">
+        TOTAL_ISU_PT = #{row.totalIsuPt,jdbcType=BIGINT},
+      </if>
+      <if test="row.totalIsuCnt != null">
+        TOTAL_ISU_CNT = #{row.totalIsuCnt,jdbcType=BIGINT},
+      </if>
+      <if test="row.totalUsePt != null">
+        TOTAL_USE_PT = #{row.totalUsePt,jdbcType=BIGINT},
+      </if>
+      <if test="row.totalUseCnt != null">
+        TOTAL_USE_CNT = #{row.totalUseCnt,jdbcType=BIGINT},
+      </if>
+      <if test="row.regUserId != null">
+        REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regDt != null">
+        REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.lastModUserId != null">
+        LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.lastModDt != null">
+        LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_cont_stat
+    set BASE_DAY = #{row.baseDay,jdbcType=VARCHAR},
+      CONT_NO = #{row.contNo,jdbcType=BIGINT},
+      CONT_STAT_GB_CD = #{row.contStatGbCd,jdbcType=VARCHAR},
+      ORG_CD = #{row.orgCd,jdbcType=VARCHAR},
+      BRCH_CD = #{row.brchCd,jdbcType=VARCHAR},
+      TOTAL_ISU_PT = #{row.totalIsuPt,jdbcType=BIGINT},
+      TOTAL_ISU_CNT = #{row.totalIsuCnt,jdbcType=BIGINT},
+      TOTAL_USE_PT = #{row.totalUsePt,jdbcType=BIGINT},
+      TOTAL_USE_CNT = #{row.totalUseCnt,jdbcType=BIGINT},
+      REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.albee.albeepoint.mapper.base.t_cont_stat.TContStat">
+    update t_cont_stat
+    <set>
+      <if test="totalIsuPt != null">
+        TOTAL_ISU_PT = #{totalIsuPt,jdbcType=BIGINT},
+      </if>
+      <if test="totalIsuCnt != null">
+        TOTAL_ISU_CNT = #{totalIsuCnt,jdbcType=BIGINT},
+      </if>
+      <if test="totalUsePt != null">
+        TOTAL_USE_PT = #{totalUsePt,jdbcType=BIGINT},
+      </if>
+      <if test="totalUseCnt != null">
+        TOTAL_USE_CNT = #{totalUseCnt,jdbcType=BIGINT},
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where BASE_DAY = #{baseDay,jdbcType=VARCHAR}
+      and CONT_NO = #{contNo,jdbcType=BIGINT}
+      and CONT_STAT_GB_CD = #{contStatGbCd,jdbcType=VARCHAR}
+      and ORG_CD = #{orgCd,jdbcType=VARCHAR}
+      and BRCH_CD = #{brchCd,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.albee.albeepoint.mapper.base.t_cont_stat.TContStat">
+    update t_cont_stat
+    set TOTAL_ISU_PT = #{totalIsuPt,jdbcType=BIGINT},
+      TOTAL_ISU_CNT = #{totalIsuCnt,jdbcType=BIGINT},
+      TOTAL_USE_PT = #{totalUsePt,jdbcType=BIGINT},
+      TOTAL_USE_CNT = #{totalUseCnt,jdbcType=BIGINT},
+      REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP}
+    where BASE_DAY = #{baseDay,jdbcType=VARCHAR}
+      and CONT_NO = #{contNo,jdbcType=BIGINT}
+      and CONT_STAT_GB_CD = #{contStatGbCd,jdbcType=VARCHAR}
+      and ORG_CD = #{orgCd,jdbcType=VARCHAR}
+      and BRCH_CD = #{brchCd,jdbcType=VARCHAR}
+  </update>
+</mapper>

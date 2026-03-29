@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.albee.albeepoint.mapper.base.t_tr_hist_detail.TTrHistDetailMapper">
+  <resultMap id="BaseResultMap" type="com.albee.albeepoint.mapper.base.t_tr_hist_detail.TTrHistDetail">
+    <id column="TR_SNO" jdbcType="BIGINT" property="trSno" />
+    <id column="TR_SEQ" jdbcType="BIGINT" property="trSeq" />
+    <result column="CONT_NO" jdbcType="BIGINT" property="contNo" />
+    <result column="MEMBER_NO" jdbcType="BIGINT" property="memberNo" />
+    <result column="PT_NO" jdbcType="BIGINT" property="ptNo" />
+    <result column="MEMBER_PT_NO" jdbcType="BIGINT" property="memberPtNo" />
+    <result column="TR_DT" jdbcType="TIMESTAMP" property="trDt" />
+    <result column="TR_GB_CD" jdbcType="VARCHAR" property="trGbCd" />
+    <result column="TR_METHOD_GB_CD" jdbcType="VARCHAR" property="trMethodGbCd" />
+    <result column="TR_PT" jdbcType="BIGINT" property="trPt" />
+    <result column="BEF_BAL_PT" jdbcType="BIGINT" property="befBalPt" />
+    <result column="AFR_BAL_PT" jdbcType="BIGINT" property="afrBalPt" />
+    <result column="CONT_BEF_BAL_PT" jdbcType="BIGINT" property="contBefBalPt" />
+    <result column="CONT_AFR_BAL_PT" jdbcType="BIGINT" property="contAfrBalPt" />
+    <result column="ORGL_TR_SNO" jdbcType="BIGINT" property="orglTrSno" />
+    <result column="REG_USER_ID" jdbcType="VARCHAR" property="regUserId" />
+    <result column="REG_DT" jdbcType="TIMESTAMP" property="regDt" />
+    <result column="LAST_MOD_USER_ID" jdbcType="VARCHAR" property="lastModUserId" />
+    <result column="LAST_MOD_DT" jdbcType="TIMESTAMP" property="lastModDt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    TR_SNO, TR_SEQ, CONT_NO, MEMBER_NO, PT_NO, MEMBER_PT_NO, TR_DT, TR_GB_CD, TR_METHOD_GB_CD, 
+    TR_PT, BEF_BAL_PT, AFR_BAL_PT, CONT_BEF_BAL_PT, CONT_AFR_BAL_PT, ORGL_TR_SNO, REG_USER_ID, 
+    REG_DT, LAST_MOD_USER_ID, LAST_MOD_DT
+  </sql>
+  <select id="selectByExample" parameterType="com.albee.albeepoint.mapper.base.t_tr_hist_detail.TTrHistDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_tr_hist_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_tr_hist_detail
+    where TR_SNO = #{trSno,jdbcType=BIGINT}
+      and TR_SEQ = #{trSeq,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_tr_hist_detail
+    where TR_SNO = #{trSno,jdbcType=BIGINT}
+      and TR_SEQ = #{trSeq,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.albee.albeepoint.mapper.base.t_tr_hist_detail.TTrHistDetailExample">
+    delete from t_tr_hist_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.albee.albeepoint.mapper.base.t_tr_hist_detail.TTrHistDetail">
+    insert into t_tr_hist_detail (TR_SNO, TR_SEQ, CONT_NO, 
+      MEMBER_NO, PT_NO, MEMBER_PT_NO, 
+      TR_DT, TR_GB_CD, TR_METHOD_GB_CD, 
+      TR_PT, BEF_BAL_PT, AFR_BAL_PT, 
+      CONT_BEF_BAL_PT, CONT_AFR_BAL_PT, ORGL_TR_SNO, 
+      REG_USER_ID, REG_DT, LAST_MOD_USER_ID, 
+      LAST_MOD_DT)
+    values (#{trSno,jdbcType=BIGINT}, #{trSeq,jdbcType=BIGINT}, #{contNo,jdbcType=BIGINT}, 
+      #{memberNo,jdbcType=BIGINT}, #{ptNo,jdbcType=BIGINT}, #{memberPtNo,jdbcType=BIGINT}, 
+      #{trDt,jdbcType=TIMESTAMP}, #{trGbCd,jdbcType=VARCHAR}, #{trMethodGbCd,jdbcType=VARCHAR}, 
+      #{trPt,jdbcType=BIGINT}, #{befBalPt,jdbcType=BIGINT}, #{afrBalPt,jdbcType=BIGINT}, 
+      #{contBefBalPt,jdbcType=BIGINT}, #{contAfrBalPt,jdbcType=BIGINT}, #{orglTrSno,jdbcType=BIGINT}, 
+      #{regUserId,jdbcType=VARCHAR}, #{regDt,jdbcType=TIMESTAMP}, #{lastModUserId,jdbcType=VARCHAR}, 
+      #{lastModDt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.albee.albeepoint.mapper.base.t_tr_hist_detail.TTrHistDetail">
+    insert into t_tr_hist_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="trSno != null">
+        TR_SNO,
+      </if>
+      <if test="trSeq != null">
+        TR_SEQ,
+      </if>
+      <if test="contNo != null">
+        CONT_NO,
+      </if>
+      <if test="memberNo != null">
+        MEMBER_NO,
+      </if>
+      <if test="ptNo != null">
+        PT_NO,
+      </if>
+      <if test="memberPtNo != null">
+        MEMBER_PT_NO,
+      </if>
+      <if test="trDt != null">
+        TR_DT,
+      </if>
+      <if test="trGbCd != null">
+        TR_GB_CD,
+      </if>
+      <if test="trMethodGbCd != null">
+        TR_METHOD_GB_CD,
+      </if>
+      <if test="trPt != null">
+        TR_PT,
+      </if>
+      <if test="befBalPt != null">
+        BEF_BAL_PT,
+      </if>
+      <if test="afrBalPt != null">
+        AFR_BAL_PT,
+      </if>
+      <if test="contBefBalPt != null">
+        CONT_BEF_BAL_PT,
+      </if>
+      <if test="contAfrBalPt != null">
+        CONT_AFR_BAL_PT,
+      </if>
+      <if test="orglTrSno != null">
+        ORGL_TR_SNO,
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID,
+      </if>
+      <if test="regDt != null">
+        REG_DT,
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID,
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="trSno != null">
+        #{trSno,jdbcType=BIGINT},
+      </if>
+      <if test="trSeq != null">
+        #{trSeq,jdbcType=BIGINT},
+      </if>
+      <if test="contNo != null">
+        #{contNo,jdbcType=BIGINT},
+      </if>
+      <if test="memberNo != null">
+        #{memberNo,jdbcType=BIGINT},
+      </if>
+      <if test="ptNo != null">
+        #{ptNo,jdbcType=BIGINT},
+      </if>
+      <if test="memberPtNo != null">
+        #{memberPtNo,jdbcType=BIGINT},
+      </if>
+      <if test="trDt != null">
+        #{trDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trGbCd != null">
+        #{trGbCd,jdbcType=VARCHAR},
+      </if>
+      <if test="trMethodGbCd != null">
+        #{trMethodGbCd,jdbcType=VARCHAR},
+      </if>
+      <if test="trPt != null">
+        #{trPt,jdbcType=BIGINT},
+      </if>
+      <if test="befBalPt != null">
+        #{befBalPt,jdbcType=BIGINT},
+      </if>
+      <if test="afrBalPt != null">
+        #{afrBalPt,jdbcType=BIGINT},
+      </if>
+      <if test="contBefBalPt != null">
+        #{contBefBalPt,jdbcType=BIGINT},
+      </if>
+      <if test="contAfrBalPt != null">
+        #{contAfrBalPt,jdbcType=BIGINT},
+      </if>
+      <if test="orglTrSno != null">
+        #{orglTrSno,jdbcType=BIGINT},
+      </if>
+      <if test="regUserId != null">
+        #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.albee.albeepoint.mapper.base.t_tr_hist_detail.TTrHistDetailExample" resultType="java.lang.Long">
+    select count(*) from t_tr_hist_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_tr_hist_detail
+    <set>
+      <if test="row.trSno != null">
+        TR_SNO = #{row.trSno,jdbcType=BIGINT},
+      </if>
+      <if test="row.trSeq != null">
+        TR_SEQ = #{row.trSeq,jdbcType=BIGINT},
+      </if>
+      <if test="row.contNo != null">
+        CONT_NO = #{row.contNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.memberNo != null">
+        MEMBER_NO = #{row.memberNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.ptNo != null">
+        PT_NO = #{row.ptNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.memberPtNo != null">
+        MEMBER_PT_NO = #{row.memberPtNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.trDt != null">
+        TR_DT = #{row.trDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.trGbCd != null">
+        TR_GB_CD = #{row.trGbCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.trMethodGbCd != null">
+        TR_METHOD_GB_CD = #{row.trMethodGbCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.trPt != null">
+        TR_PT = #{row.trPt,jdbcType=BIGINT},
+      </if>
+      <if test="row.befBalPt != null">
+        BEF_BAL_PT = #{row.befBalPt,jdbcType=BIGINT},
+      </if>
+      <if test="row.afrBalPt != null">
+        AFR_BAL_PT = #{row.afrBalPt,jdbcType=BIGINT},
+      </if>
+      <if test="row.contBefBalPt != null">
+        CONT_BEF_BAL_PT = #{row.contBefBalPt,jdbcType=BIGINT},
+      </if>
+      <if test="row.contAfrBalPt != null">
+        CONT_AFR_BAL_PT = #{row.contAfrBalPt,jdbcType=BIGINT},
+      </if>
+      <if test="row.orglTrSno != null">
+        ORGL_TR_SNO = #{row.orglTrSno,jdbcType=BIGINT},
+      </if>
+      <if test="row.regUserId != null">
+        REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regDt != null">
+        REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.lastModUserId != null">
+        LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.lastModDt != null">
+        LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_tr_hist_detail
+    set TR_SNO = #{row.trSno,jdbcType=BIGINT},
+      TR_SEQ = #{row.trSeq,jdbcType=BIGINT},
+      CONT_NO = #{row.contNo,jdbcType=BIGINT},
+      MEMBER_NO = #{row.memberNo,jdbcType=BIGINT},
+      PT_NO = #{row.ptNo,jdbcType=BIGINT},
+      MEMBER_PT_NO = #{row.memberPtNo,jdbcType=BIGINT},
+      TR_DT = #{row.trDt,jdbcType=TIMESTAMP},
+      TR_GB_CD = #{row.trGbCd,jdbcType=VARCHAR},
+      TR_METHOD_GB_CD = #{row.trMethodGbCd,jdbcType=VARCHAR},
+      TR_PT = #{row.trPt,jdbcType=BIGINT},
+      BEF_BAL_PT = #{row.befBalPt,jdbcType=BIGINT},
+      AFR_BAL_PT = #{row.afrBalPt,jdbcType=BIGINT},
+      CONT_BEF_BAL_PT = #{row.contBefBalPt,jdbcType=BIGINT},
+      CONT_AFR_BAL_PT = #{row.contAfrBalPt,jdbcType=BIGINT},
+      ORGL_TR_SNO = #{row.orglTrSno,jdbcType=BIGINT},
+      REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.albee.albeepoint.mapper.base.t_tr_hist_detail.TTrHistDetail">
+    update t_tr_hist_detail
+    <set>
+      <if test="contNo != null">
+        CONT_NO = #{contNo,jdbcType=BIGINT},
+      </if>
+      <if test="memberNo != null">
+        MEMBER_NO = #{memberNo,jdbcType=BIGINT},
+      </if>
+      <if test="ptNo != null">
+        PT_NO = #{ptNo,jdbcType=BIGINT},
+      </if>
+      <if test="memberPtNo != null">
+        MEMBER_PT_NO = #{memberPtNo,jdbcType=BIGINT},
+      </if>
+      <if test="trDt != null">
+        TR_DT = #{trDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trGbCd != null">
+        TR_GB_CD = #{trGbCd,jdbcType=VARCHAR},
+      </if>
+      <if test="trMethodGbCd != null">
+        TR_METHOD_GB_CD = #{trMethodGbCd,jdbcType=VARCHAR},
+      </if>
+      <if test="trPt != null">
+        TR_PT = #{trPt,jdbcType=BIGINT},
+      </if>
+      <if test="befBalPt != null">
+        BEF_BAL_PT = #{befBalPt,jdbcType=BIGINT},
+      </if>
+      <if test="afrBalPt != null">
+        AFR_BAL_PT = #{afrBalPt,jdbcType=BIGINT},
+      </if>
+      <if test="contBefBalPt != null">
+        CONT_BEF_BAL_PT = #{contBefBalPt,jdbcType=BIGINT},
+      </if>
+      <if test="contAfrBalPt != null">
+        CONT_AFR_BAL_PT = #{contAfrBalPt,jdbcType=BIGINT},
+      </if>
+      <if test="orglTrSno != null">
+        ORGL_TR_SNO = #{orglTrSno,jdbcType=BIGINT},
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where TR_SNO = #{trSno,jdbcType=BIGINT}
+      and TR_SEQ = #{trSeq,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.albee.albeepoint.mapper.base.t_tr_hist_detail.TTrHistDetail">
+    update t_tr_hist_detail
+    set CONT_NO = #{contNo,jdbcType=BIGINT},
+      MEMBER_NO = #{memberNo,jdbcType=BIGINT},
+      PT_NO = #{ptNo,jdbcType=BIGINT},
+      MEMBER_PT_NO = #{memberPtNo,jdbcType=BIGINT},
+      TR_DT = #{trDt,jdbcType=TIMESTAMP},
+      TR_GB_CD = #{trGbCd,jdbcType=VARCHAR},
+      TR_METHOD_GB_CD = #{trMethodGbCd,jdbcType=VARCHAR},
+      TR_PT = #{trPt,jdbcType=BIGINT},
+      BEF_BAL_PT = #{befBalPt,jdbcType=BIGINT},
+      AFR_BAL_PT = #{afrBalPt,jdbcType=BIGINT},
+      CONT_BEF_BAL_PT = #{contBefBalPt,jdbcType=BIGINT},
+      CONT_AFR_BAL_PT = #{contAfrBalPt,jdbcType=BIGINT},
+      ORGL_TR_SNO = #{orglTrSno,jdbcType=BIGINT},
+      REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP}
+    where TR_SNO = #{trSno,jdbcType=BIGINT}
+      and TR_SEQ = #{trSeq,jdbcType=BIGINT}
+  </update>
+</mapper>

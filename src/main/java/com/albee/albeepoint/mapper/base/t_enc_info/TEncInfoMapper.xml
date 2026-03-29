@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.albee.albeepoint.mapper.base.t_enc_info.TEncInfoMapper">
+  <resultMap id="BaseResultMap" type="com.albee.albeepoint.mapper.base.t_enc_info.TEncInfo">
+    <id column="TARGET_GB_CD" jdbcType="VARCHAR" property="targetGbCd" />
+    <id column="TARGET_VAL" jdbcType="VARCHAR" property="targetVal" />
+    <result column="ENC_KEY" jdbcType="VARCHAR" property="encKey" />
+    <result column="SALT_VAL" jdbcType="VARCHAR" property="saltVal" />
+    <result column="ENC_STS_CD" jdbcType="VARCHAR" property="encStsCd" />
+    <result column="REG_USER_ID" jdbcType="VARCHAR" property="regUserId" />
+    <result column="REG_DT" jdbcType="TIMESTAMP" property="regDt" />
+    <result column="LAST_MOD_USER_ID" jdbcType="VARCHAR" property="lastModUserId" />
+    <result column="LAST_MOD_DT" jdbcType="TIMESTAMP" property="lastModDt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    TARGET_GB_CD, TARGET_VAL, ENC_KEY, SALT_VAL, ENC_STS_CD, REG_USER_ID, REG_DT, LAST_MOD_USER_ID, 
+    LAST_MOD_DT
+  </sql>
+  <select id="selectByExample" parameterType="com.albee.albeepoint.mapper.base.t_enc_info.TEncInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_enc_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_enc_info
+    where TARGET_GB_CD = #{targetGbCd,jdbcType=VARCHAR}
+      and TARGET_VAL = #{targetVal,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_enc_info
+    where TARGET_GB_CD = #{targetGbCd,jdbcType=VARCHAR}
+      and TARGET_VAL = #{targetVal,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.albee.albeepoint.mapper.base.t_enc_info.TEncInfoExample">
+    delete from t_enc_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.albee.albeepoint.mapper.base.t_enc_info.TEncInfo">
+    insert into t_enc_info (TARGET_GB_CD, TARGET_VAL, ENC_KEY, 
+      SALT_VAL, ENC_STS_CD, REG_USER_ID, 
+      REG_DT, LAST_MOD_USER_ID, LAST_MOD_DT
+      )
+    values (#{targetGbCd,jdbcType=VARCHAR}, #{targetVal,jdbcType=VARCHAR}, #{encKey,jdbcType=VARCHAR}, 
+      #{saltVal,jdbcType=VARCHAR}, #{encStsCd,jdbcType=VARCHAR}, #{regUserId,jdbcType=VARCHAR}, 
+      #{regDt,jdbcType=TIMESTAMP}, #{lastModUserId,jdbcType=VARCHAR}, #{lastModDt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.albee.albeepoint.mapper.base.t_enc_info.TEncInfo">
+    insert into t_enc_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="targetGbCd != null">
+        TARGET_GB_CD,
+      </if>
+      <if test="targetVal != null">
+        TARGET_VAL,
+      </if>
+      <if test="encKey != null">
+        ENC_KEY,
+      </if>
+      <if test="saltVal != null">
+        SALT_VAL,
+      </if>
+      <if test="encStsCd != null">
+        ENC_STS_CD,
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID,
+      </if>
+      <if test="regDt != null">
+        REG_DT,
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID,
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="targetGbCd != null">
+        #{targetGbCd,jdbcType=VARCHAR},
+      </if>
+      <if test="targetVal != null">
+        #{targetVal,jdbcType=VARCHAR},
+      </if>
+      <if test="encKey != null">
+        #{encKey,jdbcType=VARCHAR},
+      </if>
+      <if test="saltVal != null">
+        #{saltVal,jdbcType=VARCHAR},
+      </if>
+      <if test="encStsCd != null">
+        #{encStsCd,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserId != null">
+        #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.albee.albeepoint.mapper.base.t_enc_info.TEncInfoExample" resultType="java.lang.Long">
+    select count(*) from t_enc_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_enc_info
+    <set>
+      <if test="row.targetGbCd != null">
+        TARGET_GB_CD = #{row.targetGbCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.targetVal != null">
+        TARGET_VAL = #{row.targetVal,jdbcType=VARCHAR},
+      </if>
+      <if test="row.encKey != null">
+        ENC_KEY = #{row.encKey,jdbcType=VARCHAR},
+      </if>
+      <if test="row.saltVal != null">
+        SALT_VAL = #{row.saltVal,jdbcType=VARCHAR},
+      </if>
+      <if test="row.encStsCd != null">
+        ENC_STS_CD = #{row.encStsCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regUserId != null">
+        REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regDt != null">
+        REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.lastModUserId != null">
+        LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.lastModDt != null">
+        LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_enc_info
+    set TARGET_GB_CD = #{row.targetGbCd,jdbcType=VARCHAR},
+      TARGET_VAL = #{row.targetVal,jdbcType=VARCHAR},
+      ENC_KEY = #{row.encKey,jdbcType=VARCHAR},
+      SALT_VAL = #{row.saltVal,jdbcType=VARCHAR},
+      ENC_STS_CD = #{row.encStsCd,jdbcType=VARCHAR},
+      REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.albee.albeepoint.mapper.base.t_enc_info.TEncInfo">
+    update t_enc_info
+    <set>
+      <if test="encKey != null">
+        ENC_KEY = #{encKey,jdbcType=VARCHAR},
+      </if>
+      <if test="saltVal != null">
+        SALT_VAL = #{saltVal,jdbcType=VARCHAR},
+      </if>
+      <if test="encStsCd != null">
+        ENC_STS_CD = #{encStsCd,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where TARGET_GB_CD = #{targetGbCd,jdbcType=VARCHAR}
+      and TARGET_VAL = #{targetVal,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.albee.albeepoint.mapper.base.t_enc_info.TEncInfo">
+    update t_enc_info
+    set ENC_KEY = #{encKey,jdbcType=VARCHAR},
+      SALT_VAL = #{saltVal,jdbcType=VARCHAR},
+      ENC_STS_CD = #{encStsCd,jdbcType=VARCHAR},
+      REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP}
+    where TARGET_GB_CD = #{targetGbCd,jdbcType=VARCHAR}
+      and TARGET_VAL = #{targetVal,jdbcType=VARCHAR}
+  </update>
+</mapper>

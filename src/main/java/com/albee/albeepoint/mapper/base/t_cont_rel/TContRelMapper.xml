@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.albee.albeepoint.mapper.base.t_cont_rel.TContRelMapper">
+  <resultMap id="BaseResultMap" type="com.albee.albeepoint.mapper.base.t_cont_rel.TContRel">
+    <id column="CONT_REL_NO" jdbcType="BIGINT" property="contRelNo" />
+    <id column="CONT_REL_SEQ" jdbcType="BIGINT" property="contRelSeq" />
+    <result column="CONT_REL_GB_CD" jdbcType="VARCHAR" property="contRelGbCd" />
+    <result column="CONT_ROLE" jdbcType="VARCHAR" property="contRole" />
+    <result column="CONT_NO" jdbcType="BIGINT" property="contNo" />
+    <result column="LINK_CONT_NO" jdbcType="BIGINT" property="linkContNo" />
+    <result column="CONT_REL_INFO" jdbcType="VARCHAR" property="contRelInfo" />
+    <result column="CONT_REL_USE_YN" jdbcType="VARCHAR" property="contRelUseYn" />
+    <result column="REG_USER_ID" jdbcType="VARCHAR" property="regUserId" />
+    <result column="REG_DT" jdbcType="TIMESTAMP" property="regDt" />
+    <result column="LAST_MOD_USER_ID" jdbcType="VARCHAR" property="lastModUserId" />
+    <result column="LAST_MOD_DT" jdbcType="TIMESTAMP" property="lastModDt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CONT_REL_NO, CONT_REL_SEQ, CONT_REL_GB_CD, CONT_ROLE, CONT_NO, LINK_CONT_NO, CONT_REL_INFO, 
+    CONT_REL_USE_YN, REG_USER_ID, REG_DT, LAST_MOD_USER_ID, LAST_MOD_DT
+  </sql>
+  <select id="selectByExample" parameterType="com.albee.albeepoint.mapper.base.t_cont_rel.TContRelExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_cont_rel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_cont_rel
+    where CONT_REL_NO = #{contRelNo,jdbcType=BIGINT}
+      and CONT_REL_SEQ = #{contRelSeq,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_cont_rel
+    where CONT_REL_NO = #{contRelNo,jdbcType=BIGINT}
+      and CONT_REL_SEQ = #{contRelSeq,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.albee.albeepoint.mapper.base.t_cont_rel.TContRelExample">
+    delete from t_cont_rel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.albee.albeepoint.mapper.base.t_cont_rel.TContRel">
+    insert into t_cont_rel (CONT_REL_NO, CONT_REL_SEQ, CONT_REL_GB_CD, 
+      CONT_ROLE, CONT_NO, LINK_CONT_NO, 
+      CONT_REL_INFO, CONT_REL_USE_YN, REG_USER_ID, 
+      REG_DT, LAST_MOD_USER_ID, LAST_MOD_DT
+      )
+    values (#{contRelNo,jdbcType=BIGINT}, #{contRelSeq,jdbcType=BIGINT}, #{contRelGbCd,jdbcType=VARCHAR}, 
+      #{contRole,jdbcType=VARCHAR}, #{contNo,jdbcType=BIGINT}, #{linkContNo,jdbcType=BIGINT}, 
+      #{contRelInfo,jdbcType=VARCHAR}, #{contRelUseYn,jdbcType=VARCHAR}, #{regUserId,jdbcType=VARCHAR}, 
+      #{regDt,jdbcType=TIMESTAMP}, #{lastModUserId,jdbcType=VARCHAR}, #{lastModDt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.albee.albeepoint.mapper.base.t_cont_rel.TContRel">
+    insert into t_cont_rel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contRelNo != null">
+        CONT_REL_NO,
+      </if>
+      <if test="contRelSeq != null">
+        CONT_REL_SEQ,
+      </if>
+      <if test="contRelGbCd != null">
+        CONT_REL_GB_CD,
+      </if>
+      <if test="contRole != null">
+        CONT_ROLE,
+      </if>
+      <if test="contNo != null">
+        CONT_NO,
+      </if>
+      <if test="linkContNo != null">
+        LINK_CONT_NO,
+      </if>
+      <if test="contRelInfo != null">
+        CONT_REL_INFO,
+      </if>
+      <if test="contRelUseYn != null">
+        CONT_REL_USE_YN,
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID,
+      </if>
+      <if test="regDt != null">
+        REG_DT,
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID,
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contRelNo != null">
+        #{contRelNo,jdbcType=BIGINT},
+      </if>
+      <if test="contRelSeq != null">
+        #{contRelSeq,jdbcType=BIGINT},
+      </if>
+      <if test="contRelGbCd != null">
+        #{contRelGbCd,jdbcType=VARCHAR},
+      </if>
+      <if test="contRole != null">
+        #{contRole,jdbcType=VARCHAR},
+      </if>
+      <if test="contNo != null">
+        #{contNo,jdbcType=BIGINT},
+      </if>
+      <if test="linkContNo != null">
+        #{linkContNo,jdbcType=BIGINT},
+      </if>
+      <if test="contRelInfo != null">
+        #{contRelInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="contRelUseYn != null">
+        #{contRelUseYn,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserId != null">
+        #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.albee.albeepoint.mapper.base.t_cont_rel.TContRelExample" resultType="java.lang.Long">
+    select count(*) from t_cont_rel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_cont_rel
+    <set>
+      <if test="row.contRelNo != null">
+        CONT_REL_NO = #{row.contRelNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.contRelSeq != null">
+        CONT_REL_SEQ = #{row.contRelSeq,jdbcType=BIGINT},
+      </if>
+      <if test="row.contRelGbCd != null">
+        CONT_REL_GB_CD = #{row.contRelGbCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.contRole != null">
+        CONT_ROLE = #{row.contRole,jdbcType=VARCHAR},
+      </if>
+      <if test="row.contNo != null">
+        CONT_NO = #{row.contNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.linkContNo != null">
+        LINK_CONT_NO = #{row.linkContNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.contRelInfo != null">
+        CONT_REL_INFO = #{row.contRelInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="row.contRelUseYn != null">
+        CONT_REL_USE_YN = #{row.contRelUseYn,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regUserId != null">
+        REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regDt != null">
+        REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.lastModUserId != null">
+        LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.lastModDt != null">
+        LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_cont_rel
+    set CONT_REL_NO = #{row.contRelNo,jdbcType=BIGINT},
+      CONT_REL_SEQ = #{row.contRelSeq,jdbcType=BIGINT},
+      CONT_REL_GB_CD = #{row.contRelGbCd,jdbcType=VARCHAR},
+      CONT_ROLE = #{row.contRole,jdbcType=VARCHAR},
+      CONT_NO = #{row.contNo,jdbcType=BIGINT},
+      LINK_CONT_NO = #{row.linkContNo,jdbcType=BIGINT},
+      CONT_REL_INFO = #{row.contRelInfo,jdbcType=VARCHAR},
+      CONT_REL_USE_YN = #{row.contRelUseYn,jdbcType=VARCHAR},
+      REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.albee.albeepoint.mapper.base.t_cont_rel.TContRel">
+    update t_cont_rel
+    <set>
+      <if test="contRelGbCd != null">
+        CONT_REL_GB_CD = #{contRelGbCd,jdbcType=VARCHAR},
+      </if>
+      <if test="contRole != null">
+        CONT_ROLE = #{contRole,jdbcType=VARCHAR},
+      </if>
+      <if test="contNo != null">
+        CONT_NO = #{contNo,jdbcType=BIGINT},
+      </if>
+      <if test="linkContNo != null">
+        LINK_CONT_NO = #{linkContNo,jdbcType=BIGINT},
+      </if>
+      <if test="contRelInfo != null">
+        CONT_REL_INFO = #{contRelInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="contRelUseYn != null">
+        CONT_REL_USE_YN = #{contRelUseYn,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where CONT_REL_NO = #{contRelNo,jdbcType=BIGINT}
+      and CONT_REL_SEQ = #{contRelSeq,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.albee.albeepoint.mapper.base.t_cont_rel.TContRel">
+    update t_cont_rel
+    set CONT_REL_GB_CD = #{contRelGbCd,jdbcType=VARCHAR},
+      CONT_ROLE = #{contRole,jdbcType=VARCHAR},
+      CONT_NO = #{contNo,jdbcType=BIGINT},
+      LINK_CONT_NO = #{linkContNo,jdbcType=BIGINT},
+      CONT_REL_INFO = #{contRelInfo,jdbcType=VARCHAR},
+      CONT_REL_USE_YN = #{contRelUseYn,jdbcType=VARCHAR},
+      REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP}
+    where CONT_REL_NO = #{contRelNo,jdbcType=BIGINT}
+      and CONT_REL_SEQ = #{contRelSeq,jdbcType=BIGINT}
+  </update>
+</mapper>

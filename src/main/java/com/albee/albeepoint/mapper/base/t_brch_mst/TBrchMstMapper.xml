@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.albee.albeepoint.mapper.base.t_brch_mst.TBrchMstMapper">
+  <resultMap id="BaseResultMap" type="com.albee.albeepoint.mapper.base.t_brch_mst.TBrchMst">
+    <id column="ORG_NO" jdbcType="BIGINT" property="orgNo" />
+    <id column="BRCH_NO" jdbcType="BIGINT" property="brchNo" />
+    <result column="ORG_CD" jdbcType="VARCHAR" property="orgCd" />
+    <result column="BRCH_CD" jdbcType="VARCHAR" property="brchCd" />
+    <result column="BRCH_NM" jdbcType="VARCHAR" property="brchNm" />
+    <result column="BRCH_DISP_NM" jdbcType="VARCHAR" property="brchDispNm" />
+    <result column="SAVE_CAN_YN" jdbcType="VARCHAR" property="saveCanYn" />
+    <result column="USE_CAN_YN" jdbcType="VARCHAR" property="useCanYn" />
+    <result column="BRCH_STS_CD" jdbcType="VARCHAR" property="brchStsCd" />
+    <result column="REG_USER_ID" jdbcType="VARCHAR" property="regUserId" />
+    <result column="REG_DT" jdbcType="TIMESTAMP" property="regDt" />
+    <result column="LAST_MOD_USER_ID" jdbcType="VARCHAR" property="lastModUserId" />
+    <result column="LAST_MOD_DT" jdbcType="TIMESTAMP" property="lastModDt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ORG_NO, BRCH_NO, ORG_CD, BRCH_CD, BRCH_NM, BRCH_DISP_NM, SAVE_CAN_YN, USE_CAN_YN, 
+    BRCH_STS_CD, REG_USER_ID, REG_DT, LAST_MOD_USER_ID, LAST_MOD_DT
+  </sql>
+  <select id="selectByExample" parameterType="com.albee.albeepoint.mapper.base.t_brch_mst.TBrchMstExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_brch_mst
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_brch_mst
+    where ORG_NO = #{orgNo,jdbcType=BIGINT}
+      and BRCH_NO = #{brchNo,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_brch_mst
+    where ORG_NO = #{orgNo,jdbcType=BIGINT}
+      and BRCH_NO = #{brchNo,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.albee.albeepoint.mapper.base.t_brch_mst.TBrchMstExample">
+    delete from t_brch_mst
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.albee.albeepoint.mapper.base.t_brch_mst.TBrchMst">
+    insert into t_brch_mst (ORG_NO, BRCH_NO, ORG_CD, 
+      BRCH_CD, BRCH_NM, BRCH_DISP_NM, 
+      SAVE_CAN_YN, USE_CAN_YN, BRCH_STS_CD, 
+      REG_USER_ID, REG_DT, LAST_MOD_USER_ID, 
+      LAST_MOD_DT)
+    values (#{orgNo,jdbcType=BIGINT}, #{brchNo,jdbcType=BIGINT}, #{orgCd,jdbcType=VARCHAR}, 
+      #{brchCd,jdbcType=VARCHAR}, #{brchNm,jdbcType=VARCHAR}, #{brchDispNm,jdbcType=VARCHAR}, 
+      #{saveCanYn,jdbcType=VARCHAR}, #{useCanYn,jdbcType=VARCHAR}, #{brchStsCd,jdbcType=VARCHAR}, 
+      #{regUserId,jdbcType=VARCHAR}, #{regDt,jdbcType=TIMESTAMP}, #{lastModUserId,jdbcType=VARCHAR}, 
+      #{lastModDt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.albee.albeepoint.mapper.base.t_brch_mst.TBrchMst">
+    insert into t_brch_mst
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgNo != null">
+        ORG_NO,
+      </if>
+      <if test="brchNo != null">
+        BRCH_NO,
+      </if>
+      <if test="orgCd != null">
+        ORG_CD,
+      </if>
+      <if test="brchCd != null">
+        BRCH_CD,
+      </if>
+      <if test="brchNm != null">
+        BRCH_NM,
+      </if>
+      <if test="brchDispNm != null">
+        BRCH_DISP_NM,
+      </if>
+      <if test="saveCanYn != null">
+        SAVE_CAN_YN,
+      </if>
+      <if test="useCanYn != null">
+        USE_CAN_YN,
+      </if>
+      <if test="brchStsCd != null">
+        BRCH_STS_CD,
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID,
+      </if>
+      <if test="regDt != null">
+        REG_DT,
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID,
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgNo != null">
+        #{orgNo,jdbcType=BIGINT},
+      </if>
+      <if test="brchNo != null">
+        #{brchNo,jdbcType=BIGINT},
+      </if>
+      <if test="orgCd != null">
+        #{orgCd,jdbcType=VARCHAR},
+      </if>
+      <if test="brchCd != null">
+        #{brchCd,jdbcType=VARCHAR},
+      </if>
+      <if test="brchNm != null">
+        #{brchNm,jdbcType=VARCHAR},
+      </if>
+      <if test="brchDispNm != null">
+        #{brchDispNm,jdbcType=VARCHAR},
+      </if>
+      <if test="saveCanYn != null">
+        #{saveCanYn,jdbcType=VARCHAR},
+      </if>
+      <if test="useCanYn != null">
+        #{useCanYn,jdbcType=VARCHAR},
+      </if>
+      <if test="brchStsCd != null">
+        #{brchStsCd,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserId != null">
+        #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.albee.albeepoint.mapper.base.t_brch_mst.TBrchMstExample" resultType="java.lang.Long">
+    select count(*) from t_brch_mst
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_brch_mst
+    <set>
+      <if test="row.orgNo != null">
+        ORG_NO = #{row.orgNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.brchNo != null">
+        BRCH_NO = #{row.brchNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.orgCd != null">
+        ORG_CD = #{row.orgCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.brchCd != null">
+        BRCH_CD = #{row.brchCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.brchNm != null">
+        BRCH_NM = #{row.brchNm,jdbcType=VARCHAR},
+      </if>
+      <if test="row.brchDispNm != null">
+        BRCH_DISP_NM = #{row.brchDispNm,jdbcType=VARCHAR},
+      </if>
+      <if test="row.saveCanYn != null">
+        SAVE_CAN_YN = #{row.saveCanYn,jdbcType=VARCHAR},
+      </if>
+      <if test="row.useCanYn != null">
+        USE_CAN_YN = #{row.useCanYn,jdbcType=VARCHAR},
+      </if>
+      <if test="row.brchStsCd != null">
+        BRCH_STS_CD = #{row.brchStsCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regUserId != null">
+        REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regDt != null">
+        REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.lastModUserId != null">
+        LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.lastModDt != null">
+        LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_brch_mst
+    set ORG_NO = #{row.orgNo,jdbcType=BIGINT},
+      BRCH_NO = #{row.brchNo,jdbcType=BIGINT},
+      ORG_CD = #{row.orgCd,jdbcType=VARCHAR},
+      BRCH_CD = #{row.brchCd,jdbcType=VARCHAR},
+      BRCH_NM = #{row.brchNm,jdbcType=VARCHAR},
+      BRCH_DISP_NM = #{row.brchDispNm,jdbcType=VARCHAR},
+      SAVE_CAN_YN = #{row.saveCanYn,jdbcType=VARCHAR},
+      USE_CAN_YN = #{row.useCanYn,jdbcType=VARCHAR},
+      BRCH_STS_CD = #{row.brchStsCd,jdbcType=VARCHAR},
+      REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.albee.albeepoint.mapper.base.t_brch_mst.TBrchMst">
+    update t_brch_mst
+    <set>
+      <if test="orgCd != null">
+        ORG_CD = #{orgCd,jdbcType=VARCHAR},
+      </if>
+      <if test="brchCd != null">
+        BRCH_CD = #{brchCd,jdbcType=VARCHAR},
+      </if>
+      <if test="brchNm != null">
+        BRCH_NM = #{brchNm,jdbcType=VARCHAR},
+      </if>
+      <if test="brchDispNm != null">
+        BRCH_DISP_NM = #{brchDispNm,jdbcType=VARCHAR},
+      </if>
+      <if test="saveCanYn != null">
+        SAVE_CAN_YN = #{saveCanYn,jdbcType=VARCHAR},
+      </if>
+      <if test="useCanYn != null">
+        USE_CAN_YN = #{useCanYn,jdbcType=VARCHAR},
+      </if>
+      <if test="brchStsCd != null">
+        BRCH_STS_CD = #{brchStsCd,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ORG_NO = #{orgNo,jdbcType=BIGINT}
+      and BRCH_NO = #{brchNo,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.albee.albeepoint.mapper.base.t_brch_mst.TBrchMst">
+    update t_brch_mst
+    set ORG_CD = #{orgCd,jdbcType=VARCHAR},
+      BRCH_CD = #{brchCd,jdbcType=VARCHAR},
+      BRCH_NM = #{brchNm,jdbcType=VARCHAR},
+      BRCH_DISP_NM = #{brchDispNm,jdbcType=VARCHAR},
+      SAVE_CAN_YN = #{saveCanYn,jdbcType=VARCHAR},
+      USE_CAN_YN = #{useCanYn,jdbcType=VARCHAR},
+      BRCH_STS_CD = #{brchStsCd,jdbcType=VARCHAR},
+      REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP}
+    where ORG_NO = #{orgNo,jdbcType=BIGINT}
+      and BRCH_NO = #{brchNo,jdbcType=BIGINT}
+  </update>
+</mapper>

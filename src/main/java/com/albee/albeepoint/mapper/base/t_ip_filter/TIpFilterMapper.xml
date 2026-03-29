@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.albee.albeepoint.mapper.base.t_ip_filter.TIpFilterMapper">
+  <resultMap id="BaseResultMap" type="com.albee.albeepoint.mapper.base.t_ip_filter.TIpFilter">
+    <id column="IP_ADDR" jdbcType="VARCHAR" property="ipAddr" />
+    <id column="CONT_NO" jdbcType="BIGINT" property="contNo" />
+    <id column="BIZ_ROLE_CD" jdbcType="VARCHAR" property="bizRoleCd" />
+    <result column="USE_YN" jdbcType="VARCHAR" property="useYn" />
+    <result column="REG_USER_ID" jdbcType="VARCHAR" property="regUserId" />
+    <result column="REG_DT" jdbcType="TIMESTAMP" property="regDt" />
+    <result column="LAST_MOD_USER_ID" jdbcType="VARCHAR" property="lastModUserId" />
+    <result column="LAST_MOD_DT" jdbcType="TIMESTAMP" property="lastModDt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    IP_ADDR, CONT_NO, BIZ_ROLE_CD, USE_YN, REG_USER_ID, REG_DT, LAST_MOD_USER_ID, LAST_MOD_DT
+  </sql>
+  <select id="selectByExample" parameterType="com.albee.albeepoint.mapper.base.t_ip_filter.TIpFilterExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_ip_filter
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_ip_filter
+    where IP_ADDR = #{ipAddr,jdbcType=VARCHAR}
+      and CONT_NO = #{contNo,jdbcType=BIGINT}
+      and BIZ_ROLE_CD = #{bizRoleCd,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_ip_filter
+    where IP_ADDR = #{ipAddr,jdbcType=VARCHAR}
+      and CONT_NO = #{contNo,jdbcType=BIGINT}
+      and BIZ_ROLE_CD = #{bizRoleCd,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.albee.albeepoint.mapper.base.t_ip_filter.TIpFilterExample">
+    delete from t_ip_filter
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.albee.albeepoint.mapper.base.t_ip_filter.TIpFilter">
+    insert into t_ip_filter (IP_ADDR, CONT_NO, BIZ_ROLE_CD, 
+      USE_YN, REG_USER_ID, REG_DT, 
+      LAST_MOD_USER_ID, LAST_MOD_DT)
+    values (#{ipAddr,jdbcType=VARCHAR}, #{contNo,jdbcType=BIGINT}, #{bizRoleCd,jdbcType=VARCHAR}, 
+      #{useYn,jdbcType=VARCHAR}, #{regUserId,jdbcType=VARCHAR}, #{regDt,jdbcType=TIMESTAMP}, 
+      #{lastModUserId,jdbcType=VARCHAR}, #{lastModDt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.albee.albeepoint.mapper.base.t_ip_filter.TIpFilter">
+    insert into t_ip_filter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ipAddr != null">
+        IP_ADDR,
+      </if>
+      <if test="contNo != null">
+        CONT_NO,
+      </if>
+      <if test="bizRoleCd != null">
+        BIZ_ROLE_CD,
+      </if>
+      <if test="useYn != null">
+        USE_YN,
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID,
+      </if>
+      <if test="regDt != null">
+        REG_DT,
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID,
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ipAddr != null">
+        #{ipAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="contNo != null">
+        #{contNo,jdbcType=BIGINT},
+      </if>
+      <if test="bizRoleCd != null">
+        #{bizRoleCd,jdbcType=VARCHAR},
+      </if>
+      <if test="useYn != null">
+        #{useYn,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserId != null">
+        #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.albee.albeepoint.mapper.base.t_ip_filter.TIpFilterExample" resultType="java.lang.Long">
+    select count(*) from t_ip_filter
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_ip_filter
+    <set>
+      <if test="row.ipAddr != null">
+        IP_ADDR = #{row.ipAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="row.contNo != null">
+        CONT_NO = #{row.contNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.bizRoleCd != null">
+        BIZ_ROLE_CD = #{row.bizRoleCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.useYn != null">
+        USE_YN = #{row.useYn,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regUserId != null">
+        REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regDt != null">
+        REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.lastModUserId != null">
+        LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.lastModDt != null">
+        LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_ip_filter
+    set IP_ADDR = #{row.ipAddr,jdbcType=VARCHAR},
+      CONT_NO = #{row.contNo,jdbcType=BIGINT},
+      BIZ_ROLE_CD = #{row.bizRoleCd,jdbcType=VARCHAR},
+      USE_YN = #{row.useYn,jdbcType=VARCHAR},
+      REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.albee.albeepoint.mapper.base.t_ip_filter.TIpFilter">
+    update t_ip_filter
+    <set>
+      <if test="useYn != null">
+        USE_YN = #{useYn,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where IP_ADDR = #{ipAddr,jdbcType=VARCHAR}
+      and CONT_NO = #{contNo,jdbcType=BIGINT}
+      and BIZ_ROLE_CD = #{bizRoleCd,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.albee.albeepoint.mapper.base.t_ip_filter.TIpFilter">
+    update t_ip_filter
+    set USE_YN = #{useYn,jdbcType=VARCHAR},
+      REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP}
+    where IP_ADDR = #{ipAddr,jdbcType=VARCHAR}
+      and CONT_NO = #{contNo,jdbcType=BIGINT}
+      and BIZ_ROLE_CD = #{bizRoleCd,jdbcType=VARCHAR}
+  </update>
+</mapper>

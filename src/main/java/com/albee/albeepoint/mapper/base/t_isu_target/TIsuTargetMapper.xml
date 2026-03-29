@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.albee.albeepoint.mapper.base.t_isu_target.TIsuTargetMapper">
+  <resultMap id="BaseResultMap" type="com.albee.albeepoint.mapper.base.t_isu_target.TIsuTarget">
+    <id column="ISU_TARGET_SNO" jdbcType="BIGINT" property="isuTargetSno" />
+    <result column="CONT_NO" jdbcType="BIGINT" property="contNo" />
+    <result column="MEMBER_ID_ENC" jdbcType="VARCHAR" property="memberIdEnc" />
+    <result column="MEMBER_NO" jdbcType="BIGINT" property="memberNo" />
+    <result column="ISU_TARGET_TYPE_CD" jdbcType="VARCHAR" property="isuTargetTypeCd" />
+    <result column="ISU_REQ_DY" jdbcType="VARCHAR" property="isuReqDy" />
+    <result column="ISU_REQ_PT" jdbcType="BIGINT" property="isuReqPt" />
+    <result column="USE_YN" jdbcType="VARCHAR" property="useYn" />
+    <result column="ORG_CD" jdbcType="VARCHAR" property="orgCd" />
+    <result column="BRCH_CD" jdbcType="VARCHAR" property="brchCd" />
+    <result column="ISU_PT" jdbcType="BIGINT" property="isuPt" />
+    <result column="ISU_DT" jdbcType="TIMESTAMP" property="isuDt" />
+    <result column="RESULT_CD" jdbcType="VARCHAR" property="resultCd" />
+    <result column="RESULT_MSG" jdbcType="VARCHAR" property="resultMsg" />
+    <result column="REG_USER_ID" jdbcType="VARCHAR" property="regUserId" />
+    <result column="REG_DT" jdbcType="TIMESTAMP" property="regDt" />
+    <result column="LAST_MOD_USER_ID" jdbcType="VARCHAR" property="lastModUserId" />
+    <result column="LAST_MOD_DT" jdbcType="TIMESTAMP" property="lastModDt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ISU_TARGET_SNO, CONT_NO, MEMBER_ID_ENC, MEMBER_NO, ISU_TARGET_TYPE_CD, ISU_REQ_DY, 
+    ISU_REQ_PT, USE_YN, ORG_CD, BRCH_CD, ISU_PT, ISU_DT, RESULT_CD, RESULT_MSG, REG_USER_ID, 
+    REG_DT, LAST_MOD_USER_ID, LAST_MOD_DT
+  </sql>
+  <select id="selectByExample" parameterType="com.albee.albeepoint.mapper.base.t_isu_target.TIsuTargetExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_isu_target
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_isu_target
+    where ISU_TARGET_SNO = #{isuTargetSno,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_isu_target
+    where ISU_TARGET_SNO = #{isuTargetSno,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.albee.albeepoint.mapper.base.t_isu_target.TIsuTargetExample">
+    delete from t_isu_target
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.albee.albeepoint.mapper.base.t_isu_target.TIsuTarget">
+    insert into t_isu_target (ISU_TARGET_SNO, CONT_NO, MEMBER_ID_ENC, 
+      MEMBER_NO, ISU_TARGET_TYPE_CD, ISU_REQ_DY, 
+      ISU_REQ_PT, USE_YN, ORG_CD, 
+      BRCH_CD, ISU_PT, ISU_DT, 
+      RESULT_CD, RESULT_MSG, REG_USER_ID, 
+      REG_DT, LAST_MOD_USER_ID, LAST_MOD_DT
+      )
+    values (#{isuTargetSno,jdbcType=BIGINT}, #{contNo,jdbcType=BIGINT}, #{memberIdEnc,jdbcType=VARCHAR}, 
+      #{memberNo,jdbcType=BIGINT}, #{isuTargetTypeCd,jdbcType=VARCHAR}, #{isuReqDy,jdbcType=VARCHAR}, 
+      #{isuReqPt,jdbcType=BIGINT}, #{useYn,jdbcType=VARCHAR}, #{orgCd,jdbcType=VARCHAR}, 
+      #{brchCd,jdbcType=VARCHAR}, #{isuPt,jdbcType=BIGINT}, #{isuDt,jdbcType=TIMESTAMP}, 
+      #{resultCd,jdbcType=VARCHAR}, #{resultMsg,jdbcType=VARCHAR}, #{regUserId,jdbcType=VARCHAR}, 
+      #{regDt,jdbcType=TIMESTAMP}, #{lastModUserId,jdbcType=VARCHAR}, #{lastModDt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.albee.albeepoint.mapper.base.t_isu_target.TIsuTarget">
+    insert into t_isu_target
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="isuTargetSno != null">
+        ISU_TARGET_SNO,
+      </if>
+      <if test="contNo != null">
+        CONT_NO,
+      </if>
+      <if test="memberIdEnc != null">
+        MEMBER_ID_ENC,
+      </if>
+      <if test="memberNo != null">
+        MEMBER_NO,
+      </if>
+      <if test="isuTargetTypeCd != null">
+        ISU_TARGET_TYPE_CD,
+      </if>
+      <if test="isuReqDy != null">
+        ISU_REQ_DY,
+      </if>
+      <if test="isuReqPt != null">
+        ISU_REQ_PT,
+      </if>
+      <if test="useYn != null">
+        USE_YN,
+      </if>
+      <if test="orgCd != null">
+        ORG_CD,
+      </if>
+      <if test="brchCd != null">
+        BRCH_CD,
+      </if>
+      <if test="isuPt != null">
+        ISU_PT,
+      </if>
+      <if test="isuDt != null">
+        ISU_DT,
+      </if>
+      <if test="resultCd != null">
+        RESULT_CD,
+      </if>
+      <if test="resultMsg != null">
+        RESULT_MSG,
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID,
+      </if>
+      <if test="regDt != null">
+        REG_DT,
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID,
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="isuTargetSno != null">
+        #{isuTargetSno,jdbcType=BIGINT},
+      </if>
+      <if test="contNo != null">
+        #{contNo,jdbcType=BIGINT},
+      </if>
+      <if test="memberIdEnc != null">
+        #{memberIdEnc,jdbcType=VARCHAR},
+      </if>
+      <if test="memberNo != null">
+        #{memberNo,jdbcType=BIGINT},
+      </if>
+      <if test="isuTargetTypeCd != null">
+        #{isuTargetTypeCd,jdbcType=VARCHAR},
+      </if>
+      <if test="isuReqDy != null">
+        #{isuReqDy,jdbcType=VARCHAR},
+      </if>
+      <if test="isuReqPt != null">
+        #{isuReqPt,jdbcType=BIGINT},
+      </if>
+      <if test="useYn != null">
+        #{useYn,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCd != null">
+        #{orgCd,jdbcType=VARCHAR},
+      </if>
+      <if test="brchCd != null">
+        #{brchCd,jdbcType=VARCHAR},
+      </if>
+      <if test="isuPt != null">
+        #{isuPt,jdbcType=BIGINT},
+      </if>
+      <if test="isuDt != null">
+        #{isuDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resultCd != null">
+        #{resultCd,jdbcType=VARCHAR},
+      </if>
+      <if test="resultMsg != null">
+        #{resultMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserId != null">
+        #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.albee.albeepoint.mapper.base.t_isu_target.TIsuTargetExample" resultType="java.lang.Long">
+    select count(*) from t_isu_target
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_isu_target
+    <set>
+      <if test="row.isuTargetSno != null">
+        ISU_TARGET_SNO = #{row.isuTargetSno,jdbcType=BIGINT},
+      </if>
+      <if test="row.contNo != null">
+        CONT_NO = #{row.contNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.memberIdEnc != null">
+        MEMBER_ID_ENC = #{row.memberIdEnc,jdbcType=VARCHAR},
+      </if>
+      <if test="row.memberNo != null">
+        MEMBER_NO = #{row.memberNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.isuTargetTypeCd != null">
+        ISU_TARGET_TYPE_CD = #{row.isuTargetTypeCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.isuReqDy != null">
+        ISU_REQ_DY = #{row.isuReqDy,jdbcType=VARCHAR},
+      </if>
+      <if test="row.isuReqPt != null">
+        ISU_REQ_PT = #{row.isuReqPt,jdbcType=BIGINT},
+      </if>
+      <if test="row.useYn != null">
+        USE_YN = #{row.useYn,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgCd != null">
+        ORG_CD = #{row.orgCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.brchCd != null">
+        BRCH_CD = #{row.brchCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.isuPt != null">
+        ISU_PT = #{row.isuPt,jdbcType=BIGINT},
+      </if>
+      <if test="row.isuDt != null">
+        ISU_DT = #{row.isuDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.resultCd != null">
+        RESULT_CD = #{row.resultCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.resultMsg != null">
+        RESULT_MSG = #{row.resultMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regUserId != null">
+        REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regDt != null">
+        REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.lastModUserId != null">
+        LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.lastModDt != null">
+        LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_isu_target
+    set ISU_TARGET_SNO = #{row.isuTargetSno,jdbcType=BIGINT},
+      CONT_NO = #{row.contNo,jdbcType=BIGINT},
+      MEMBER_ID_ENC = #{row.memberIdEnc,jdbcType=VARCHAR},
+      MEMBER_NO = #{row.memberNo,jdbcType=BIGINT},
+      ISU_TARGET_TYPE_CD = #{row.isuTargetTypeCd,jdbcType=VARCHAR},
+      ISU_REQ_DY = #{row.isuReqDy,jdbcType=VARCHAR},
+      ISU_REQ_PT = #{row.isuReqPt,jdbcType=BIGINT},
+      USE_YN = #{row.useYn,jdbcType=VARCHAR},
+      ORG_CD = #{row.orgCd,jdbcType=VARCHAR},
+      BRCH_CD = #{row.brchCd,jdbcType=VARCHAR},
+      ISU_PT = #{row.isuPt,jdbcType=BIGINT},
+      ISU_DT = #{row.isuDt,jdbcType=TIMESTAMP},
+      RESULT_CD = #{row.resultCd,jdbcType=VARCHAR},
+      RESULT_MSG = #{row.resultMsg,jdbcType=VARCHAR},
+      REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.albee.albeepoint.mapper.base.t_isu_target.TIsuTarget">
+    update t_isu_target
+    <set>
+      <if test="contNo != null">
+        CONT_NO = #{contNo,jdbcType=BIGINT},
+      </if>
+      <if test="memberIdEnc != null">
+        MEMBER_ID_ENC = #{memberIdEnc,jdbcType=VARCHAR},
+      </if>
+      <if test="memberNo != null">
+        MEMBER_NO = #{memberNo,jdbcType=BIGINT},
+      </if>
+      <if test="isuTargetTypeCd != null">
+        ISU_TARGET_TYPE_CD = #{isuTargetTypeCd,jdbcType=VARCHAR},
+      </if>
+      <if test="isuReqDy != null">
+        ISU_REQ_DY = #{isuReqDy,jdbcType=VARCHAR},
+      </if>
+      <if test="isuReqPt != null">
+        ISU_REQ_PT = #{isuReqPt,jdbcType=BIGINT},
+      </if>
+      <if test="useYn != null">
+        USE_YN = #{useYn,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCd != null">
+        ORG_CD = #{orgCd,jdbcType=VARCHAR},
+      </if>
+      <if test="brchCd != null">
+        BRCH_CD = #{brchCd,jdbcType=VARCHAR},
+      </if>
+      <if test="isuPt != null">
+        ISU_PT = #{isuPt,jdbcType=BIGINT},
+      </if>
+      <if test="isuDt != null">
+        ISU_DT = #{isuDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resultCd != null">
+        RESULT_CD = #{resultCd,jdbcType=VARCHAR},
+      </if>
+      <if test="resultMsg != null">
+        RESULT_MSG = #{resultMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ISU_TARGET_SNO = #{isuTargetSno,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.albee.albeepoint.mapper.base.t_isu_target.TIsuTarget">
+    update t_isu_target
+    set CONT_NO = #{contNo,jdbcType=BIGINT},
+      MEMBER_ID_ENC = #{memberIdEnc,jdbcType=VARCHAR},
+      MEMBER_NO = #{memberNo,jdbcType=BIGINT},
+      ISU_TARGET_TYPE_CD = #{isuTargetTypeCd,jdbcType=VARCHAR},
+      ISU_REQ_DY = #{isuReqDy,jdbcType=VARCHAR},
+      ISU_REQ_PT = #{isuReqPt,jdbcType=BIGINT},
+      USE_YN = #{useYn,jdbcType=VARCHAR},
+      ORG_CD = #{orgCd,jdbcType=VARCHAR},
+      BRCH_CD = #{brchCd,jdbcType=VARCHAR},
+      ISU_PT = #{isuPt,jdbcType=BIGINT},
+      ISU_DT = #{isuDt,jdbcType=TIMESTAMP},
+      RESULT_CD = #{resultCd,jdbcType=VARCHAR},
+      RESULT_MSG = #{resultMsg,jdbcType=VARCHAR},
+      REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP}
+    where ISU_TARGET_SNO = #{isuTargetSno,jdbcType=BIGINT}
+  </update>
+</mapper>

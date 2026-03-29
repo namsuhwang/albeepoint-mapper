@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.albee.albeepoint.mapper.base.t_uri_mst.TUriMstMapper">
+  <resultMap id="BaseResultMap" type="com.albee.albeepoint.mapper.base.t_uri_mst.TUriMst">
+    <id column="URI" jdbcType="VARCHAR" property="uri" />
+    <id column="TR_GB_CD" jdbcType="VARCHAR" property="trGbCd" />
+    <result column="ACS_POLICY_CD" jdbcType="VARCHAR" property="acsPolicyCd" />
+    <result column="USE_YN" jdbcType="VARCHAR" property="useYn" />
+    <result column="URI_INFO" jdbcType="VARCHAR" property="uriInfo" />
+    <result column="REG_USER_ID" jdbcType="VARCHAR" property="regUserId" />
+    <result column="REG_DT" jdbcType="TIMESTAMP" property="regDt" />
+    <result column="LAST_MOD_USER_ID" jdbcType="VARCHAR" property="lastModUserId" />
+    <result column="LAST_MOD_DT" jdbcType="TIMESTAMP" property="lastModDt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    URI, TR_GB_CD, ACS_POLICY_CD, USE_YN, URI_INFO, REG_USER_ID, REG_DT, LAST_MOD_USER_ID, 
+    LAST_MOD_DT
+  </sql>
+  <select id="selectByExample" parameterType="com.albee.albeepoint.mapper.base.t_uri_mst.TUriMstExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_uri_mst
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_uri_mst
+    where URI = #{uri,jdbcType=VARCHAR}
+      and TR_GB_CD = #{trGbCd,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_uri_mst
+    where URI = #{uri,jdbcType=VARCHAR}
+      and TR_GB_CD = #{trGbCd,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.albee.albeepoint.mapper.base.t_uri_mst.TUriMstExample">
+    delete from t_uri_mst
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.albee.albeepoint.mapper.base.t_uri_mst.TUriMst">
+    insert into t_uri_mst (URI, TR_GB_CD, ACS_POLICY_CD, 
+      USE_YN, URI_INFO, REG_USER_ID, 
+      REG_DT, LAST_MOD_USER_ID, LAST_MOD_DT
+      )
+    values (#{uri,jdbcType=VARCHAR}, #{trGbCd,jdbcType=VARCHAR}, #{acsPolicyCd,jdbcType=VARCHAR}, 
+      #{useYn,jdbcType=VARCHAR}, #{uriInfo,jdbcType=VARCHAR}, #{regUserId,jdbcType=VARCHAR}, 
+      #{regDt,jdbcType=TIMESTAMP}, #{lastModUserId,jdbcType=VARCHAR}, #{lastModDt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.albee.albeepoint.mapper.base.t_uri_mst.TUriMst">
+    insert into t_uri_mst
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uri != null">
+        URI,
+      </if>
+      <if test="trGbCd != null">
+        TR_GB_CD,
+      </if>
+      <if test="acsPolicyCd != null">
+        ACS_POLICY_CD,
+      </if>
+      <if test="useYn != null">
+        USE_YN,
+      </if>
+      <if test="uriInfo != null">
+        URI_INFO,
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID,
+      </if>
+      <if test="regDt != null">
+        REG_DT,
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID,
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uri != null">
+        #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="trGbCd != null">
+        #{trGbCd,jdbcType=VARCHAR},
+      </if>
+      <if test="acsPolicyCd != null">
+        #{acsPolicyCd,jdbcType=VARCHAR},
+      </if>
+      <if test="useYn != null">
+        #{useYn,jdbcType=VARCHAR},
+      </if>
+      <if test="uriInfo != null">
+        #{uriInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserId != null">
+        #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.albee.albeepoint.mapper.base.t_uri_mst.TUriMstExample" resultType="java.lang.Long">
+    select count(*) from t_uri_mst
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_uri_mst
+    <set>
+      <if test="row.uri != null">
+        URI = #{row.uri,jdbcType=VARCHAR},
+      </if>
+      <if test="row.trGbCd != null">
+        TR_GB_CD = #{row.trGbCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.acsPolicyCd != null">
+        ACS_POLICY_CD = #{row.acsPolicyCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.useYn != null">
+        USE_YN = #{row.useYn,jdbcType=VARCHAR},
+      </if>
+      <if test="row.uriInfo != null">
+        URI_INFO = #{row.uriInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regUserId != null">
+        REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regDt != null">
+        REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.lastModUserId != null">
+        LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.lastModDt != null">
+        LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_uri_mst
+    set URI = #{row.uri,jdbcType=VARCHAR},
+      TR_GB_CD = #{row.trGbCd,jdbcType=VARCHAR},
+      ACS_POLICY_CD = #{row.acsPolicyCd,jdbcType=VARCHAR},
+      USE_YN = #{row.useYn,jdbcType=VARCHAR},
+      URI_INFO = #{row.uriInfo,jdbcType=VARCHAR},
+      REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.albee.albeepoint.mapper.base.t_uri_mst.TUriMst">
+    update t_uri_mst
+    <set>
+      <if test="acsPolicyCd != null">
+        ACS_POLICY_CD = #{acsPolicyCd,jdbcType=VARCHAR},
+      </if>
+      <if test="useYn != null">
+        USE_YN = #{useYn,jdbcType=VARCHAR},
+      </if>
+      <if test="uriInfo != null">
+        URI_INFO = #{uriInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where URI = #{uri,jdbcType=VARCHAR}
+      and TR_GB_CD = #{trGbCd,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.albee.albeepoint.mapper.base.t_uri_mst.TUriMst">
+    update t_uri_mst
+    set ACS_POLICY_CD = #{acsPolicyCd,jdbcType=VARCHAR},
+      USE_YN = #{useYn,jdbcType=VARCHAR},
+      URI_INFO = #{uriInfo,jdbcType=VARCHAR},
+      REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP}
+    where URI = #{uri,jdbcType=VARCHAR}
+      and TR_GB_CD = #{trGbCd,jdbcType=VARCHAR}
+  </update>
+</mapper>

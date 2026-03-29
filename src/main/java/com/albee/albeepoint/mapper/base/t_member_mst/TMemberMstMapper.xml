@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.albee.albeepoint.mapper.base.t_member_mst.TMemberMstMapper">
+  <resultMap id="BaseResultMap" type="com.albee.albeepoint.mapper.base.t_member_mst.TMemberMst">
+    <id column="MEMBER_NO" jdbcType="BIGINT" property="memberNo" />
+    <result column="ORG_NO" jdbcType="BIGINT" property="orgNo" />
+    <result column="MEMBER_ID_ENC" jdbcType="VARCHAR" property="memberIdEnc" />
+    <result column="MEMBER_NM" jdbcType="VARCHAR" property="memberNm" />
+    <result column="MEMBER_STS_CD" jdbcType="VARCHAR" property="memberStsCd" />
+    <result column="JOIN_DT" jdbcType="TIMESTAMP" property="joinDt" />
+    <result column="LEAVE_DT" jdbcType="TIMESTAMP" property="leaveDt" />
+    <result column="LAST_CONTACT_DT" jdbcType="TIMESTAMP" property="lastContactDt" />
+    <result column="REG_USER_ID" jdbcType="VARCHAR" property="regUserId" />
+    <result column="REG_DT" jdbcType="TIMESTAMP" property="regDt" />
+    <result column="LAST_MOD_USER_ID" jdbcType="VARCHAR" property="lastModUserId" />
+    <result column="LAST_MOD_DT" jdbcType="TIMESTAMP" property="lastModDt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    MEMBER_NO, ORG_NO, MEMBER_ID_ENC, MEMBER_NM, MEMBER_STS_CD, JOIN_DT, LEAVE_DT, LAST_CONTACT_DT, 
+    REG_USER_ID, REG_DT, LAST_MOD_USER_ID, LAST_MOD_DT
+  </sql>
+  <select id="selectByExample" parameterType="com.albee.albeepoint.mapper.base.t_member_mst.TMemberMstExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_member_mst
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_member_mst
+    where MEMBER_NO = #{memberNo,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_member_mst
+    where MEMBER_NO = #{memberNo,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.albee.albeepoint.mapper.base.t_member_mst.TMemberMstExample">
+    delete from t_member_mst
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.albee.albeepoint.mapper.base.t_member_mst.TMemberMst">
+    insert into t_member_mst (MEMBER_NO, ORG_NO, MEMBER_ID_ENC, 
+      MEMBER_NM, MEMBER_STS_CD, JOIN_DT, 
+      LEAVE_DT, LAST_CONTACT_DT, REG_USER_ID, 
+      REG_DT, LAST_MOD_USER_ID, LAST_MOD_DT
+      )
+    values (#{memberNo,jdbcType=BIGINT}, #{orgNo,jdbcType=BIGINT}, #{memberIdEnc,jdbcType=VARCHAR}, 
+      #{memberNm,jdbcType=VARCHAR}, #{memberStsCd,jdbcType=VARCHAR}, #{joinDt,jdbcType=TIMESTAMP}, 
+      #{leaveDt,jdbcType=TIMESTAMP}, #{lastContactDt,jdbcType=TIMESTAMP}, #{regUserId,jdbcType=VARCHAR}, 
+      #{regDt,jdbcType=TIMESTAMP}, #{lastModUserId,jdbcType=VARCHAR}, #{lastModDt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.albee.albeepoint.mapper.base.t_member_mst.TMemberMst">
+    insert into t_member_mst
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memberNo != null">
+        MEMBER_NO,
+      </if>
+      <if test="orgNo != null">
+        ORG_NO,
+      </if>
+      <if test="memberIdEnc != null">
+        MEMBER_ID_ENC,
+      </if>
+      <if test="memberNm != null">
+        MEMBER_NM,
+      </if>
+      <if test="memberStsCd != null">
+        MEMBER_STS_CD,
+      </if>
+      <if test="joinDt != null">
+        JOIN_DT,
+      </if>
+      <if test="leaveDt != null">
+        LEAVE_DT,
+      </if>
+      <if test="lastContactDt != null">
+        LAST_CONTACT_DT,
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID,
+      </if>
+      <if test="regDt != null">
+        REG_DT,
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID,
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memberNo != null">
+        #{memberNo,jdbcType=BIGINT},
+      </if>
+      <if test="orgNo != null">
+        #{orgNo,jdbcType=BIGINT},
+      </if>
+      <if test="memberIdEnc != null">
+        #{memberIdEnc,jdbcType=VARCHAR},
+      </if>
+      <if test="memberNm != null">
+        #{memberNm,jdbcType=VARCHAR},
+      </if>
+      <if test="memberStsCd != null">
+        #{memberStsCd,jdbcType=VARCHAR},
+      </if>
+      <if test="joinDt != null">
+        #{joinDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveDt != null">
+        #{leaveDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastContactDt != null">
+        #{lastContactDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regUserId != null">
+        #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.albee.albeepoint.mapper.base.t_member_mst.TMemberMstExample" resultType="java.lang.Long">
+    select count(*) from t_member_mst
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_member_mst
+    <set>
+      <if test="row.memberNo != null">
+        MEMBER_NO = #{row.memberNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.orgNo != null">
+        ORG_NO = #{row.orgNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.memberIdEnc != null">
+        MEMBER_ID_ENC = #{row.memberIdEnc,jdbcType=VARCHAR},
+      </if>
+      <if test="row.memberNm != null">
+        MEMBER_NM = #{row.memberNm,jdbcType=VARCHAR},
+      </if>
+      <if test="row.memberStsCd != null">
+        MEMBER_STS_CD = #{row.memberStsCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.joinDt != null">
+        JOIN_DT = #{row.joinDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.leaveDt != null">
+        LEAVE_DT = #{row.leaveDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.lastContactDt != null">
+        LAST_CONTACT_DT = #{row.lastContactDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.regUserId != null">
+        REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regDt != null">
+        REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.lastModUserId != null">
+        LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.lastModDt != null">
+        LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_member_mst
+    set MEMBER_NO = #{row.memberNo,jdbcType=BIGINT},
+      ORG_NO = #{row.orgNo,jdbcType=BIGINT},
+      MEMBER_ID_ENC = #{row.memberIdEnc,jdbcType=VARCHAR},
+      MEMBER_NM = #{row.memberNm,jdbcType=VARCHAR},
+      MEMBER_STS_CD = #{row.memberStsCd,jdbcType=VARCHAR},
+      JOIN_DT = #{row.joinDt,jdbcType=TIMESTAMP},
+      LEAVE_DT = #{row.leaveDt,jdbcType=TIMESTAMP},
+      LAST_CONTACT_DT = #{row.lastContactDt,jdbcType=TIMESTAMP},
+      REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.albee.albeepoint.mapper.base.t_member_mst.TMemberMst">
+    update t_member_mst
+    <set>
+      <if test="orgNo != null">
+        ORG_NO = #{orgNo,jdbcType=BIGINT},
+      </if>
+      <if test="memberIdEnc != null">
+        MEMBER_ID_ENC = #{memberIdEnc,jdbcType=VARCHAR},
+      </if>
+      <if test="memberNm != null">
+        MEMBER_NM = #{memberNm,jdbcType=VARCHAR},
+      </if>
+      <if test="memberStsCd != null">
+        MEMBER_STS_CD = #{memberStsCd,jdbcType=VARCHAR},
+      </if>
+      <if test="joinDt != null">
+        JOIN_DT = #{joinDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveDt != null">
+        LEAVE_DT = #{leaveDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastContactDt != null">
+        LAST_CONTACT_DT = #{lastContactDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where MEMBER_NO = #{memberNo,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.albee.albeepoint.mapper.base.t_member_mst.TMemberMst">
+    update t_member_mst
+    set ORG_NO = #{orgNo,jdbcType=BIGINT},
+      MEMBER_ID_ENC = #{memberIdEnc,jdbcType=VARCHAR},
+      MEMBER_NM = #{memberNm,jdbcType=VARCHAR},
+      MEMBER_STS_CD = #{memberStsCd,jdbcType=VARCHAR},
+      JOIN_DT = #{joinDt,jdbcType=TIMESTAMP},
+      LEAVE_DT = #{leaveDt,jdbcType=TIMESTAMP},
+      LAST_CONTACT_DT = #{lastContactDt,jdbcType=TIMESTAMP},
+      REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP}
+    where MEMBER_NO = #{memberNo,jdbcType=BIGINT}
+  </update>
+</mapper>

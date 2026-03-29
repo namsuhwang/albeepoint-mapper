@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.albee.albeepoint.mapper.base.t_member_pid.TMemberPidMapper">
+  <resultMap id="BaseResultMap" type="com.albee.albeepoint.mapper.base.t_member_pid.TMemberPid">
+    <id column="PID_NO" jdbcType="BIGINT" property="pidNo" />
+    <result column="MEMBER_NO" jdbcType="BIGINT" property="memberNo" />
+    <result column="ORG_NO" jdbcType="BIGINT" property="orgNo" />
+    <result column="PID_ENC" jdbcType="VARCHAR" property="pidEnc" />
+    <result column="PID_STS_CD" jdbcType="VARCHAR" property="pidStsCd" />
+    <result column="JOIN_DT" jdbcType="TIMESTAMP" property="joinDt" />
+    <result column="STOP_DT" jdbcType="TIMESTAMP" property="stopDt" />
+    <result column="REG_USER_ID" jdbcType="VARCHAR" property="regUserId" />
+    <result column="REG_DT" jdbcType="TIMESTAMP" property="regDt" />
+    <result column="LAST_MOD_USER_ID" jdbcType="VARCHAR" property="lastModUserId" />
+    <result column="LAST_MOD_DT" jdbcType="TIMESTAMP" property="lastModDt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PID_NO, MEMBER_NO, ORG_NO, PID_ENC, PID_STS_CD, JOIN_DT, STOP_DT, REG_USER_ID, REG_DT, 
+    LAST_MOD_USER_ID, LAST_MOD_DT
+  </sql>
+  <select id="selectByExample" parameterType="com.albee.albeepoint.mapper.base.t_member_pid.TMemberPidExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_member_pid
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_member_pid
+    where PID_NO = #{pidNo,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_member_pid
+    where PID_NO = #{pidNo,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.albee.albeepoint.mapper.base.t_member_pid.TMemberPidExample">
+    delete from t_member_pid
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.albee.albeepoint.mapper.base.t_member_pid.TMemberPid">
+    insert into t_member_pid (PID_NO, MEMBER_NO, ORG_NO, 
+      PID_ENC, PID_STS_CD, JOIN_DT, 
+      STOP_DT, REG_USER_ID, REG_DT, 
+      LAST_MOD_USER_ID, LAST_MOD_DT)
+    values (#{pidNo,jdbcType=BIGINT}, #{memberNo,jdbcType=BIGINT}, #{orgNo,jdbcType=BIGINT}, 
+      #{pidEnc,jdbcType=VARCHAR}, #{pidStsCd,jdbcType=VARCHAR}, #{joinDt,jdbcType=TIMESTAMP}, 
+      #{stopDt,jdbcType=TIMESTAMP}, #{regUserId,jdbcType=VARCHAR}, #{regDt,jdbcType=TIMESTAMP}, 
+      #{lastModUserId,jdbcType=VARCHAR}, #{lastModDt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.albee.albeepoint.mapper.base.t_member_pid.TMemberPid">
+    insert into t_member_pid
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pidNo != null">
+        PID_NO,
+      </if>
+      <if test="memberNo != null">
+        MEMBER_NO,
+      </if>
+      <if test="orgNo != null">
+        ORG_NO,
+      </if>
+      <if test="pidEnc != null">
+        PID_ENC,
+      </if>
+      <if test="pidStsCd != null">
+        PID_STS_CD,
+      </if>
+      <if test="joinDt != null">
+        JOIN_DT,
+      </if>
+      <if test="stopDt != null">
+        STOP_DT,
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID,
+      </if>
+      <if test="regDt != null">
+        REG_DT,
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID,
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pidNo != null">
+        #{pidNo,jdbcType=BIGINT},
+      </if>
+      <if test="memberNo != null">
+        #{memberNo,jdbcType=BIGINT},
+      </if>
+      <if test="orgNo != null">
+        #{orgNo,jdbcType=BIGINT},
+      </if>
+      <if test="pidEnc != null">
+        #{pidEnc,jdbcType=VARCHAR},
+      </if>
+      <if test="pidStsCd != null">
+        #{pidStsCd,jdbcType=VARCHAR},
+      </if>
+      <if test="joinDt != null">
+        #{joinDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopDt != null">
+        #{stopDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regUserId != null">
+        #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.albee.albeepoint.mapper.base.t_member_pid.TMemberPidExample" resultType="java.lang.Long">
+    select count(*) from t_member_pid
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_member_pid
+    <set>
+      <if test="row.pidNo != null">
+        PID_NO = #{row.pidNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.memberNo != null">
+        MEMBER_NO = #{row.memberNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.orgNo != null">
+        ORG_NO = #{row.orgNo,jdbcType=BIGINT},
+      </if>
+      <if test="row.pidEnc != null">
+        PID_ENC = #{row.pidEnc,jdbcType=VARCHAR},
+      </if>
+      <if test="row.pidStsCd != null">
+        PID_STS_CD = #{row.pidStsCd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.joinDt != null">
+        JOIN_DT = #{row.joinDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.stopDt != null">
+        STOP_DT = #{row.stopDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.regUserId != null">
+        REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regDt != null">
+        REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.lastModUserId != null">
+        LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.lastModDt != null">
+        LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_member_pid
+    set PID_NO = #{row.pidNo,jdbcType=BIGINT},
+      MEMBER_NO = #{row.memberNo,jdbcType=BIGINT},
+      ORG_NO = #{row.orgNo,jdbcType=BIGINT},
+      PID_ENC = #{row.pidEnc,jdbcType=VARCHAR},
+      PID_STS_CD = #{row.pidStsCd,jdbcType=VARCHAR},
+      JOIN_DT = #{row.joinDt,jdbcType=TIMESTAMP},
+      STOP_DT = #{row.stopDt,jdbcType=TIMESTAMP},
+      REG_USER_ID = #{row.regUserId,jdbcType=VARCHAR},
+      REG_DT = #{row.regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{row.lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{row.lastModDt,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.albee.albeepoint.mapper.base.t_member_pid.TMemberPid">
+    update t_member_pid
+    <set>
+      <if test="memberNo != null">
+        MEMBER_NO = #{memberNo,jdbcType=BIGINT},
+      </if>
+      <if test="orgNo != null">
+        ORG_NO = #{orgNo,jdbcType=BIGINT},
+      </if>
+      <if test="pidEnc != null">
+        PID_ENC = #{pidEnc,jdbcType=VARCHAR},
+      </if>
+      <if test="pidStsCd != null">
+        PID_STS_CD = #{pidStsCd,jdbcType=VARCHAR},
+      </if>
+      <if test="joinDt != null">
+        JOIN_DT = #{joinDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopDt != null">
+        STOP_DT = #{stopDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regUserId != null">
+        REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDt != null">
+        REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModUserId != null">
+        LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModDt != null">
+        LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where PID_NO = #{pidNo,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.albee.albeepoint.mapper.base.t_member_pid.TMemberPid">
+    update t_member_pid
+    set MEMBER_NO = #{memberNo,jdbcType=BIGINT},
+      ORG_NO = #{orgNo,jdbcType=BIGINT},
+      PID_ENC = #{pidEnc,jdbcType=VARCHAR},
+      PID_STS_CD = #{pidStsCd,jdbcType=VARCHAR},
+      JOIN_DT = #{joinDt,jdbcType=TIMESTAMP},
+      STOP_DT = #{stopDt,jdbcType=TIMESTAMP},
+      REG_USER_ID = #{regUserId,jdbcType=VARCHAR},
+      REG_DT = #{regDt,jdbcType=TIMESTAMP},
+      LAST_MOD_USER_ID = #{lastModUserId,jdbcType=VARCHAR},
+      LAST_MOD_DT = #{lastModDt,jdbcType=TIMESTAMP}
+    where PID_NO = #{pidNo,jdbcType=BIGINT}
+  </update>
+</mapper>
